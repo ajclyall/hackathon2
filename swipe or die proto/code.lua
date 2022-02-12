@@ -1,3 +1,5 @@
+require "home-scene"
+
 --[[
   Pixel Vision 8 - New Template Script
   Copyright (C) 2017, Pixel Vision 8 (@pixelvision8)
@@ -18,6 +20,9 @@
 ]]--
 local message = "SWIPE OR DIE"
 
+HOME, TINDER, RESULT, FINAL = 1, 2, 3, 4
+
+
 --[[
   The Init() method is part of the game's lifecycle and called a game starts.
   We are going to use this method to configure background color,
@@ -27,6 +32,12 @@ function Init()
 
   -- Here we are manually changing the background color
   BackgroundColor(4)
+
+  scenes = {HomeScene:Init()
+            -- TinderScene:Init(),
+            -- ResultsScene:Init(),
+            -- FinalScene:Init()}
+}
 
   local display = Display()
 
@@ -43,7 +54,19 @@ function Init()
     DrawText(lines[i], 1, startY + (i - 1), DrawMode.Tile, "large", 15)
   end
 
+
+  SwitchScene(HOME)
+
 end
+
+
+
+function SwitchScene(id)
+  activeSceneId = id
+  activeScene = scenes[activeSceneId]
+  activeScene:Reset()
+end
+
 
 --[[
   The Update() method is part of the game's life cycle. The engine calls
@@ -51,7 +74,9 @@ end
   timeDelta, which is the difference in milliseconds since the last frame.
 ]]--
 function Update(timeDelta)
-
+  if (activeScene ~= nil) then
+    activeScene:Update(timeDelta)
+  end
 
 
   -- TODO add your own update logic here
@@ -64,15 +89,17 @@ end
   to render sprites to the display.
 ]]--
 function Draw()
-  DrawSprite(0,100,100)
-
-  
 
   -- We can use the RedrawDisplay() method to clear the screen and redraw
   -- the tilemap in a single call.
 
 
   RedrawDisplay()
+
+  if(activeScene ~= nil) then
+    activeScene:Draw()
+
+  end
 
   -- TODO add your own draw logic here.
 
