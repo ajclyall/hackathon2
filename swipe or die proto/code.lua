@@ -16,7 +16,7 @@
   of fonts into the default.font.png. Use uppercase for larger characters and
   lowercase for a smaller one.
 ]]--
-local message = "EMPTY GAME\n\n\nThis is an empty game template.\n\n\nVisit 'www.pixelvision8.com' to learn more about creating games from scratch."
+local message = "SWIPE OR DIE"
 
 --[[
   The Init() method is part of the game's lifecycle and called a game starts.
@@ -26,7 +26,7 @@ local message = "EMPTY GAME\n\n\nThis is an empty game template.\n\n\nVisit 'www
 function Init()
 
   -- Here we are manually changing the background color
-  BackgroundColor(0)
+  BackgroundColor(4)
 
   local display = Display()
 
@@ -52,6 +52,8 @@ end
 ]]--
 function Update(timeDelta)
 
+
+
   -- TODO add your own update logic here
 
 end
@@ -62,9 +64,14 @@ end
   to render sprites to the display.
 ]]--
 function Draw()
+  DrawSprite(0,100,100)
+
+  
 
   -- We can use the RedrawDisplay() method to clear the screen and redraw
   -- the tilemap in a single call.
+
+
   RedrawDisplay()
 
   -- TODO add your own draw logic here.
